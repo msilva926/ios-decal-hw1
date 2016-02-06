@@ -22,15 +22,15 @@ class Words {
 //: ### variables the same type? If not, why?
 
 
-//: [EXPLAIN YOUR ANSWER HERE]
+//: No the variables are not the same type because it is optional for the values passed into the init function to be a string type since it has a ?, whereas the instance variables must be a string type
 
 
 //: ## Q2: Variable Types and Function Types
     func arePalindromes(words: [String]) -> Bool {
         let reversedWords = words.map() {String($0.characters.reverse())}
-        var numElements = words.count
+        let numElements = words.count
         
-        for let i = 0; i < numElements; i++ {
+        for var i = 0; i < numElements; i++ {
             if words[i] != reversedWords[i] {
                 return false
             }
@@ -41,12 +41,14 @@ class Words {
 //: ### change) the code at the very bottom. Debug the function.
 
 
-//: [EXPLAIN YOUR ANSWER HERE]
+//: Immutable objects cannot pass through a mutating operator, and the i in the for loop is a let type and is getting incremented during the loop.
+//: numElements was never mutated so the compiler is suggesting to change its type to let.
+
 
 
 //: ## Q3: More Functions and Object Initialization
-    class func isAnagram() -> Bool {
-        var countLetters : [Character : Int] //Line X
+    func isAnagram() -> Bool {
+        var countLetters : [Character : Int] = [Character : Int]() //Line X
         var lenA = self.wordA.characters.count
         var lenB = self.wordB.characters.count
         
@@ -81,7 +83,7 @@ class Words {
             }
         }
         
-        return nil
+        return true
     }
 //: ### What is the problem with declaring **countLetters** as we do in **Line X**,
 //: ### and then using it in **Line Y**? Fix it (by only changing **Line X**).
@@ -89,8 +91,9 @@ class Words {
 //: ### change) the code at the very bottom. Debug the function.
 
 
-//: [EXPLAIN YOUR ANSWER HERE]
-    
+//: When dictionaries are defined with a colon, you need to add "= [Character : Int]()" to the end.
+//: The isAnagram() method was a class method which is why there were bugs about the instance variables. 
+//: I changed it so that the method was an instance instead of a class method.
     
 }
 
